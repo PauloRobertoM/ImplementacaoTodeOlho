@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/template.xhtml">
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{usuario.verificaSessao}" />
+	</f:metadata>
+	<ui:define name="main-content">
+		<br>
+		<br>
+		</br>
+		</br>
+		 <section class="wrapper site-min-height"> 	 
+		 	<div class="row mt">
+		 		<div class="container">
+		 			 <h3 class="title-perfil">
+		 			 <i class="fa fa-angle-right"></i>Registre sua denúncia</h3>
+		 			 <h:form prependId="false" enctype="multipart/form-data">
+			<h:inputHidden id="lat" value="#{localizacao.localizacao.latitude}" required="true" />		
+			<h:inputHidden id="lng" value="#{localizacao.localizacao.longitude}" required="true" />
+					
+			
+			<h:panelGrid>
+				<h:outputText value="Localização: " class="lead" />
+				<h:outputText value="Informe a localização do problema urbano encontrado" />
+				
+				<p:gmap class="mapa" id="gmap" center="-5.811350, -35.204538" zoom="13"
+						type="HYBRID" style="width:1000px;height:400px"
+						model="#{localizacao.emptyModel}"
+						onPointClick="handlePointClick(event);" 
+						widgetVar="map" />
+				
+				<h:outputText value="Categoria" class="lead"/>
+				<h:outputText value="Informe a categoria em que sua denúncia se encaixa" />
+				
+				<h:selectOneListbox size="1"
+						value="#{categoria.cat.id}" styleClass="form-control">
+						<f:selectItems value="#{categoria.categoriaItens}" />
+				</h:selectOneListbox>
+				<br/>
+				<h:outputText value="Descrição: " class="lead" />
+				<h:outputText value="Descreva o problema urbano encontrado"  />
+				<h:inputTextarea id="descricao" value="#{denuncia.denuncia.descricao}"
+						placeholder="Máximo 255 caracteres" label="Texto" rows="5"
+						cols="50" 
+						maxlength="255"
+						autoResize="false"
+						required="true"
+						styleClass="form-control" />		
+				<br/>			
+				<h:outputText value="Midia:" class="lead" />
+				<h:outputText value="Anexe uma imagem do problema encontrado"  />
+				<br/>
+				<p:fileUpload value="#{denuncia.upfile}" mode="simple"
+						skinSimple="true" />
+			
+			</h:panelGrid>
+			<h:commandButton 
+				class="btn"
+				value="Registrar denúncia" 
+				id="nonAjax" 
+				action="index.jsf?faces-redirect=true"
+				actionListener="#{denuncia.salvar}"
+				ajax="false" />			
+		</h:form>
+		 			 
+		 		</div><!-- Fim div container -->
+		 	</div>
+		 </section><!-- Fim section wrapper -->
+	</ui:define>
+</ui:composition>
+</html>

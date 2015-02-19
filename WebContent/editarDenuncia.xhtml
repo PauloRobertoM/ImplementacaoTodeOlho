@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+			"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view encoding="ISO-8859-1">
+	<h:head>
+		<title>Editar Denuncia</title>
+
+
+	</h:head>
+
+	<h:body>
+
+
+
+		<p:growl id="messages" showDetail="true" />
+
+		<h:form prependId="false">
+			<h:inputText id="lat" value="#{localizacao.localizacao.latitude}"
+				required="true" />
+			<h:inputText id="lng" value="#{localizacao.localizacao.longitude}"
+				required="true" />
+
+			<p:panelGrid columns="2">
+				<f:facet name="header">
+					<h:outputText value="Registre sua Denuncia" />
+				</f:facet>
+
+
+				<h:outputText value="Descrição: " />
+				<p:inputTextarea id="descricao"
+					value="#{editarDenuncia.denuncia.descricao}"
+					placeholder="Máximo 255 caracteres" label="Texto" rows="5"
+					cols="50" maxlength="255" autoResize="false" required="true" />
+
+			</p:panelGrid>
+			<p:commandButton value="Enviar" id="nonAjax"
+				action="#{editarDenuncia.alterar}" ajax="false">
+				<f:param name="param" value="#{editarDenuncia.codigoDenuncia}" />
+			</p:commandButton>
+		</h:form>
+
+
+		<script type="text/javascript">
+			var currentMarker = null;
+
+			function handlePointClick(event) {
+				if (currentMarker === null) {
+					document.getElementById('lat').value = event.latLng.lat();
+					document.getElementById('lng').value = event.latLng.lng();
+
+					currentMarker = new google.maps.Marker({
+						position : new google.maps.LatLng(event.latLng.lat(),
+								event.latLng.lng())
+					});
+
+					PF('map').addOverlay(currentMarker);
+
+					PF('dlg').show();
+				}
+			}
+		</script>
+
+	</h:body>
+
+</f:view>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title><ui:insert name="title">Tô de olho</ui:insert></title>
+  <h:outputStylesheet library="bootstrap/css/" name="bootstrap.css" />
+  <h:outputStylesheet library="bootstrap/css/" name="style_todeolho.css" />
+    
+  <h:outputStylesheet library="bootstrap/css/"  name="style.css"/>
+  <h:outputStylesheet library="bootstrap/css/"  name="style-responsive.css"/>
+  <!-- js placed at the end of the document so the pages load faster -->
+    	
+  <h:outputScript library="bootstrap/js" name="jquery.js" />
+  <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+ <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>	
+ 
+			
+</h:head>
+
+<h:body>
+	
+		<ui:insert name="header">
+			<ui:include src="/templates/header.xhtml" />
+		</ui:insert>
+
+
+	<div id="main-content">
+		<ui:insert name="main-content">
+		</ui:insert>
+	</div>
+
+	<div id="footer">
+		<ui:insert name="footer">
+				<ui:include src="/templates/footer.xhtml" />
+		</ui:insert>
+	</div>
+
+</h:body>
+
+</html>

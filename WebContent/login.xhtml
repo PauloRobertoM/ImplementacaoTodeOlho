@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<f:view encoding="ISO-8859-1">
+	<h:head>
+		<title>Denuncias Urbanas</title>
+		 <h:outputStylesheet library="bootstrap/css/" name="bootstrap.css" />
+		  <h:outputStylesheet library="bootstrap/css/" name="style_todeolho.css" />
+    
+    	<h:outputStylesheet library="bootstrap/css/"  name="style.css"/>
+    	<h:outputStylesheet library="bootstrap/css/"  name="style-responsive.css"/>
+    	  <!-- js placed at the end of the document so the pages load faster -->
+    	
+    	<h:outputScript library="bootstrap/js" name="jquery.js" />
+    	<h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+    	
+	</h:head>
+	<h:body>
+		<div id="login-page">
+			<div class="barra_top"></div>
+			<div class="container logo-login">
+	  			<p:graphicImage name="bootstrap/img/logo_2.png" />
+	  		</div>	
+	  		
+	  		<div class="container">
+	  			<h:form class="form-login">
+	  				<h2 class="form-login-heading">LOGIN</h2>
+	  				<p:growl id="messages" showDetail="true" />
+	  				 <div class="login-wrap">
+	  				 	<p:inputText styleClass="form-control" id="login" value="#{usuario.login}" label="Nome" required="true" placeholder="Login"  />			
+						<br/>
+						<p:password styleClass="form-control" id="senha" value="#{usuario.senha}" label="Senha" required="true" placeholder="Senha"/>		
+	  				 	
+						 <label class="checkbox">
+		                	<span class="pull-right">
+		                    	<a data-toggle="modal" href="#myModal"> Esqueceu sua senha?</a>
+		                	</span>
+		           		 </label>
+						
+						<h:commandButton styleClass="btn btn-theme btn-block" value="Entrar" id="botao1"  action="#{usuario.autentica}" ajax="false" />		
+	  				 	 
+		           		 <hr/>
+		           		  <div class="registration">Não tem uma conta?<br/><a class="" href="#">Criar uma conta</a></div>	
+	  				 </div>	
+	  				 
+	  				 
+	  				 <!-- Modal -->
+		          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+		              <div class="modal-dialog">
+		                  <div class="modal-content">
+		                      <div class="modal-header">
+		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Times</button>
+		                          <h4 class="modal-title">Forgot Password ?</h4>
+		                      </div>
+		                      <div class="modal-body">
+		                          <p>Enter your e-mail address below to reset your password.</p>
+		                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix"/>
+		                      </div>
+		                      <div class="modal-footer">
+		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+		                          <button class="btn btn-theme" type="button">Submit</button>
+		                      </div>
+		                  </div>
+		              </div>
+		          </div>
+		          <!-- modal -->
+	  			</h:form>
+	  		</div> <!-- Fim container -->
+		</div> <!-- Fim login page -->
+	</h:body>
+</f:view>
+</html>

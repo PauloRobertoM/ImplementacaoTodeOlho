@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>To de Olho</title>
+	 <!--external css-->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+	 <h:outputStylesheet library="bootstrap/lineicons"  name="style.css"/>
+	  <h:outputStylesheet library="bootstrap/font-awesome/css"  name="font-awesome.css"/>
+	  <script type="text/javascript">
+			var currentMarker = null;
+			function handlePointClick(event) {
+				if (currentMarker === null) {
+					document.getElementById('lat').value = event.latLng.lat();
+					document.getElementById('lng').value = event.latLng.lng();
+					currentMarker = new google.maps.Marker({
+						position : new google.maps.LatLng(event.latLng.lat(),
+								event.latLng.lng())
+								
+					});
+					PF('map').addOverlay(currentMarker);
+					PF('dlg').show();
+				}
+			}
+			
+		
+		</script>
+	 
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="header black-bg">
+	 	   <p:commandLink styleClass="logo"><p:graphicImage name="bootstrap/img/logo.png" /></p:commandLink>
+	 		   <div class="nav notify-row" id="top_menu">
+	 		   		 <!--  notification start -->
+                	 <ui:fragment styleClass="nav top-menu" rendered="#{usuario.logado}"> 
+                	 	 
+                	 	  <li id="header_inbox_bar" class="dropdown">
+                	 	  	<a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            	<i class="fa fa-envelope-o"></i>
+                            	<span class="badge bg-theme">5</span>
+                        	</a>  
+                	 	  
+                	 	  
+                	 	   <ul class="dropdown-menu extended inbox">
+                	 	   		    <div class="notify-arrow notify-arrow-green"></div>
+                	 	   		    <li>
+                                		<p class="green">Você tem 5 notificações</p>
+                            		</li>
+                            		
+                            		<li>
+                                		<a href="index.html#">
+		                                    <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"/></span>
+		                                    
+		                                    <span class="subject"> </span>
+		                                    <span class="from">Zac Snider</span>
+		                                    <span class="time">Just now</span>
+	                                   
+	                                    	<span class="message">
+	                                        	Hi mate, how is everything?
+	                                   		 </span>
+                               			 </a>
+                            		</li> <!-- Fim notificacoes -->
+                            		
+                         
+                	 	   </ul><!-- Fim dropdown -->
+                	 	</li>
+                	 	 <!-- Item perfil -->
+                   					 <li class="dropdown" >
+                   					 
+                   					 		<a  data-toggle="dropdown"  class="perfil" href="">
+                            					<p:graphicImage name="bootstrap/img/avatar.jpg" />
+                        					</a>
+                   					 	
+                        				<h:form class="dropdown-menu extended tasks-bar">
+                        					
+	                        					<div class="notify-arrow notify-arrow-green"></div>
+	                        					<!-- Login usuario -->
+	                        					<li >
+	                        						<p class="green">
+														<h:outputText value="Olá Cidadão: #{usuario.usuario.login}" rendered="#{usuario.logado}"></h:outputText>
+												    </p>
+												</li>
+	                               				<li>
+	                               				 	<h:commandLink value="Perfil" action="PerfilCidadao.jsf" rendered="#{usuario.logado}" /> 
+	                               				</li>
+	                                            <!-- Logout usuario -->
+	                                            <li>
+	                                            	<h:commandLink value="Sair" action="#{usuario.logout}" rendered="#{usuario.logado}" />				
+	                                            </li>
+                        				</h:form> 
+                   					 </li> <!-- Fim perfil -->
+                	 </ui:fragment><!-- Fim top_menu -->
+	 		   </div><!-- Fim Top menu -->
+			   
+			   <!-- Botão denunciar -->
+			   <div class="top-menu">
+            		<h:form>
+            			<ul class="nav pull-right top-menu">
+                    		<li>
+                    			<h:commandButton styleClass="logout"  id="botao2" value="Denunciar" rendered="#{usuario.logado}" action="cadastrarDenuncia.jsf?faces-redirect=true" ajax="false" />
+                    			<h:commandButton styleClass="logout"  id="botao3" value="Login" rendered="#{!usuario.logado}" action="login" ajax="false" />
+                    			<h:commandButton styleClass="logout"  id="botao4" value="Cadastre-se " rendered="#{!usuario.logado}" action="cadastrarUsuario" ajax="false" />
+                    		</li>
+            			</ul>					
+            		</h:form> 	
+              </div>
+		
+		</div><!-- Fim HEADER -->	
+	</div><!-- Fim container -->
+</h:body>
+</html>

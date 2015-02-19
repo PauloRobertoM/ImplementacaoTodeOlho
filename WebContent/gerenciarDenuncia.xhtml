@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/template.xhtml">
+	
+	<ui:define name="main-content">
+	<p:gmap center="-5.811350, -35.204538" zoom="12" type="HYBRID" style="width:100%;height:300px" model="#{principal.simpleModel}" />	
+		 <section class="wrapper site-min-height"> 	 
+		 	<div class="row mt">
+		 		<div class="container">
+		 			<h:form id="form">
+			
+				<p:dataTable id="tbl" var="denuncia" value="#{gerenciarDenuncia.denuncias}"
+					rows="10" style="margin-bottom:20px; text-align:center;">
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Mídia" />
+						</f:facet>
+						<h:outputText value="#{denuncia.midia}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Categoria" />
+						</f:facet>
+						<h:outputText value="#{denuncia.categoria.categoria}" />
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="Descrição" />
+						</f:facet>
+						<h:outputText value="#{denuncia.descricao}" />
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+						
+						</f:facet>
+
+					<p:commandButton 
+							value="Editar"
+							id="botao1"							
+							action="#{editarDenuncia.editAction}" 
+							ajax="false">
+							<f:param name="param" value="#{denuncia.id}" />
+						</p:commandButton>
+						<br/>
+						<p:growl id="message" showDetail="true" />
+
+					<p:commandButton  	
+							value="Excluir"
+							action="#{gerenciarDenuncia.excluirDenuncia}" 
+							update="message">
+							
+							<f:param name="id" value="#{denuncia.id}" />
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+
+		
+		 		
+		 		</div>
+		 	</div>
+		 </section><!-- Fim section wrapper -->
+	</ui:define>
+</ui:composition>
+</html>
